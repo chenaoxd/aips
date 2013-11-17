@@ -17,7 +17,7 @@ function newact(req, res){
             req.flash('error', err);
             return res.redirect('/');
         }
-        res.send(act._id);
+        res.redirect('actinfo/'+act._id);
     });
 }
 
