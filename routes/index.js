@@ -14,4 +14,5 @@ module.exports = function(app){
     app.post('/subform/:id', activity.subform);
     app.get('/actinfo/:id', activity.actinfo);
     app.get('/statistics/:id', activity.statistics);
+    app.get('/modform/:id', activity.modform);
 };

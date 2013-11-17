@@ -38,7 +38,7 @@ Activity.prototype.save = function(callback) {
 };
 
 Activity.get = function(id, callback) {
-    actModel.findOne({_id: id}, function(err, act){
+    actModel.findOne({_id: mongoose.Types.ObjectId(id)}, function(err, act){
         if(err){
             return callback(err);
         }

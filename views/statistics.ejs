@@ -8,13 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
     <% for(var i in e_form_list){ %>
+    <tr>
       <% for(var item in s_form){ %>
         <td><%= e_form_list[i]['content'][item] %></td>
       <% } %>
-    <% } %>
     </tr>
+    <% } %>
   </tbody>
 </table>
 <% include footer %>

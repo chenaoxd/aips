@@ -22,9 +22,9 @@ function newact(req, res){
 }
 
 function viewact(req, res){
-    Activity.get(mongoose.Types.ObjectId(req.params.id), function(err, act){
+    Activity.get(req.params.id, function(err, act){
         if(!act){
-            res.send('No activity:' + req.params.id);
+            res.send('No such activity:' + req.params.id);
             console.log(req.body);
             return;
         }
@@ -55,9 +55,9 @@ function subform(req, res){
 }
 
 function actinfo(req, res){
-    Activity.get(mongoose.Types.ObjectId(req.params.id), function(err, act){
+    Activity.get(req.params.id, function(err, act){
         if(!act){
-            res.send('No activity:' + req.params.id);
+            res.send('No such activity:' + req.params.id);
             console.log(req.body);
             return;
         }
@@ -66,6 +66,7 @@ function actinfo(req, res){
             act_name: act.name,
             sign_url: settings.baseUrl + 'viewact/' + act._id,
             statistics_url: settings.baseUrl + 'statistics/' + act._id,
+            form_url: settings.baseUrl + 'modform/' + act._id,
             title: act.name
         };
         res.render('actinfo', context);
@@ -73,7 +74,7 @@ function actinfo(req, res){
 }
 
 function statistics(req, res){
-    Activity.get(mongoose.Types.ObjectId(req.params.id), function(err, act){
+    Activity.get(req.params.id, function(err, act){
         if(!act){
             res.send('No Activity:' + req.params.id);
             console.log(req.body);
@@ -93,9 +94,26 @@ function statistics(req, res){
     });
 }
 
+function modform(req, res){
+    Activity.get(req.params.id, function(err, act){
+        if(!act){
+            res.send('No such activity' + req.params.id);
+            console.log(req.body);
+            return;
+        }
+        var context = {
+            act_name: act.name,
+            title: act.name,
+            s_form: JSON.stringify(act.s_form)
+        };
+        res.render('modform',context);
+    });
+}
+
 exports.main = main;
 exports.newact = newact;
 exports.viewact = viewact;
 exports.subform = subform;
 exports.actinfo = actinfo;
 exports.statistics = statistics;
+exports.modform = modform;
