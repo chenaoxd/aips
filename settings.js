@@ -1,5 +1,5 @@
 module.exports = {
-    db: 'blog',
+    db: 'aips',
     host: 'localhost/',
     baseUrl: 'http://localhost:3000/'
 };
