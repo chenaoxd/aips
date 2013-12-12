@@ -1,8 +1,5 @@
 activity = require('./activity');
-function sleep(milliSeconds){
-    var startTime = new Date().getTime();
-    while (new Date().getTime() < startTime + milliSeconds);
-}
+settings = require('../settings.js');
 
 module.exports = function(app){
     app.get('/main', activity.main);
@@ -15,4 +12,6 @@ module.exports = function(app){
     app.get('/actinfo/:id', activity.actinfo);
     app.get('/statistics/:id', activity.statistics);
     app.get('/modform/:id', activity.modform);
+    
+
 };

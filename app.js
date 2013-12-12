@@ -19,8 +19,8 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+app.use(express.static(path.join(__dirname, 'public/app')));
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
 
 db.init();
 
@@ -30,6 +30,10 @@ if ('development' == app.get('env')) {
 }
 
 routes(app);
+
+app.get('*', function(req,res){
+    res.sendfile(__dirname + '/public/app/index.html');
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
