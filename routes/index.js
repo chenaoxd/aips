@@ -5,7 +5,7 @@ function sleep(milliSeconds){
 }
 
 module.exports = function(app){
-    app.get('/', activity.main);
+    app.get('/main', activity.main);
     app.get('/test', function(req, res) {
         res.render('index', {title: 'test'});
     });

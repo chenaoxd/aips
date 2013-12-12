@@ -2,22 +2,29 @@ var Activity = require('../models/activity.js');
 var Form = require('../models/form.js');
 var settings = require('../settings');
 var mongoose = require('mongoose');
+var helper = require('../helper/basehelper.js');
+var crypto = require('crypto');
 
 function main(req, res){
     res.render('index', {title: 'main'});
 }
 
 function newact(req, res){
+    securityKey = crypto.randomBytes(8).toString('hex');
     var newAct = new Activity({
         name: req.body.act_name,
-        securityKey: req.body.security_key
+        securityKey: securityKey
     });
     newAct.save(function(err, act){
         if(err){
             req.flash('error', err);
             return res.redirect('/');
         }
-        res.redirect('actinfo/'+act._id);
+        res.send({
+            'error': helper.error(1, 'Create success'),
+            'security_key': act.securityKey,
+            'activity_id': act._id
+        });
     });
 }
 

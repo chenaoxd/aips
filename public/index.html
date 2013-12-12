@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="phonecatApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script src="/javascripts/jquery.js"></script>  
+  <script src="/javascripts/base.js"></script>
+  <script src="/javascripts/angular.min.js"></script>
+  <script src="/javascripts/test.js"></script>
+  <script src="/javascripts/ui-bootstrap-tpls-0.6.0.min.js"></script>
+  <link href="/bootstrap3/css/bootstrap.css" rel="stylesheet">
+  <title>Homepage</title>
+</head>
+<body ng-controller="PhoneListCtrl">
+  <div class="container" style="padding-top: 100px;">
+    Search: <input ng-model="query">
+    <ul class="phones">
+      <li ng-repeat="phone in phones | filter:query">
+        {{phone.name}}
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
