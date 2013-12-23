@@ -3,7 +3,7 @@
   <div class="form-group">
     <label class="control-label col-lg-1">活动名</label>
     <div class="col-lg-2">
-      <input type="text" name="act_name" class="form-control" ng-model="act_name" required>
+      <input type="text" name="act_name" class="form-control" ng-model="new_act.name" required>
       <div class="has-error" ng-show="newActForm.act_name.$error.required">
         <label class="control-label">Required</label>
       </div>
@@ -16,7 +16,8 @@
     </div>
   </div>
   <div>
-    <tt>act_name={{act_name}}</tt><br>
+    <tt>act_name={{new_act.name}}</tt><br>
+    <tt>act_name={{new_act.act_id}}</tt><br>
     <tt>newActForm.input.$valid = {{newActForm.act_name.$valid}}</tt><br>
     <tt>newActForm.input.$error = {{newActForm.act_name.$error}}</tt><br>
     <tt>newActForm.$valid = {{newActForm.$valid}}</tt><br>

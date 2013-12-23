@@ -26,15 +26,20 @@ db.init();
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
+
+app.all('*', function(req, res, next){
+    if(req.path.substring(0, 4) == '/api'){
+        console.log('/api');
+        next();
+    }else{
+        res.sendfile(__dirname + '/public/app/index.html');
+    }
+});
 
 routes(app);
 
-app.get('*', function(req,res){
-    res.sendfile(__dirname + '/public/app/index.html');
-});
-
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });

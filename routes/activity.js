@@ -12,7 +12,7 @@ function main(req, res){
 function newact(req, res){
     securityKey = crypto.randomBytes(8).toString('hex');
     var newAct = new Activity({
-        name: req.body.act_name,
+        name: req.body.name,
         securityKey: securityKey
     });
     newAct.save(function(err, act){
@@ -21,11 +21,20 @@ function newact(req, res){
             return res.redirect('/');
         }
         res.send({
-            'error': helper.error(1, 'Create success'),
+            'name': act.name,
             'security_key': act.securityKey,
-            'activity_id': act._id
+            'act_id': act._id
         });
     });
+}
+
+function save_info(req, res){
+   Activity.get(req.params.id, function(err, act){
+       if(!act){
+           res.status(404).send('save_info');
+       }
+       res.send('save_success');
+   });
 }
 
 function viewact(req, res){
@@ -124,3 +133,4 @@ exports.subform = subform;
 exports.actinfo = actinfo;
 exports.statistics = statistics;
 exports.modform = modform;
+exports.save_info = save_info;
