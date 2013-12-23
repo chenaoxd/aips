@@ -37,6 +37,19 @@ function save_info(req, res){
    });
 }
 
+function get_act(req, res){
+    Activity.get(req.params.id, function(err, act){
+        if(!act){
+            res.status(404).send('No such act');
+        }
+        res.send({
+            name: act.name,
+            security_key: act.securityKey,
+            act_id: act._id
+        });
+    });
+}
+
 function viewact(req, res){
     Activity.get(req.params.id, function(err, act){
         if(!act){
@@ -134,3 +147,4 @@ exports.actinfo = actinfo;
 exports.statistics = statistics;
 exports.modform = modform;
 exports.save_info = save_info;
+exports.get_act = get_act;

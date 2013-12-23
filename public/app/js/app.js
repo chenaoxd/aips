@@ -12,6 +12,7 @@ angular.module('myApp', [
     constant('api_prefix','/api').
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {       
         $locationProvider.html5Mode(true);
+        $locationProvider.hashPrefix = '!';
 
         $routeProvider.when('/view1', {templateUrl: '/partials/partial1.html', controller: 'MyCtrl1'});
         $routeProvider.when('/view2', {templateUrl: '/partials/partial2.html', controller: 'MyCtrl2'});

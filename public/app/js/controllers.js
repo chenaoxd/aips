@@ -24,11 +24,11 @@ angular.module('myApp.controllers', ['ngResource']).
             );
         };
     }])
-    .controller('ActInfoCtrl', ['$scope', 'ActivityService', function($scope, act_ser) {
-        console.log('test');
+    .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams',function($scope, act_ser, $routeParams) {
         $scope.act = act_ser.get();
+        console.log($routeParams.act_id);
         if(act_ser.act_id != $routeParams.act_id){
             act_ser.init($routeParams.act_id);
         }
-        console.log($scope.act.name);
+//        console.log($scope.act.name);
     }]);
