@@ -26,9 +26,11 @@ angular.module('myApp.controllers', ['ngResource']).
     }])
     .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams',function($scope, act_ser, $routeParams) {
         $scope.act = act_ser.get();
-        console.log($routeParams.act_id);
         if(act_ser.act_id != $routeParams.act_id){
             act_ser.init($routeParams.act_id);
         }
+        $scope.save_act = function(){
+            $scope.act.$save();
+        };
 //        console.log($scope.act.name);
     }]);

@@ -33,7 +33,14 @@ function save_info(req, res){
        if(!act){
            res.status(404).send('save_info');
        }
-       res.send('save_success');
+       act.name = req.body.name;
+       act.securityKey = req.body.security_key;
+       act.save();
+       res.send({
+           'name': act.name,
+           'security_key': act.securityKey,
+           'act_id': act._id
+       })
    });
 }
 

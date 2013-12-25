@@ -12,7 +12,7 @@ angular.module('myApp', [
     constant('api_prefix','/api').
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {       
         $locationProvider.html5Mode(true);
-        $locationProvider.hashPrefix = '!';
+        $locationProvider.hashPrefix = '';
 
         $routeProvider.when('/view1', {templateUrl: '/partials/partial1.html', controller: 'MyCtrl1'});
         $routeProvider.when('/view2', {templateUrl: '/partials/partial2.html', controller: 'MyCtrl2'});
@@ -36,7 +36,13 @@ angular.module('myApp', [
                 activity.name = 'default_name';
             },
             'init': function(_id){
-                activity = Activity.get({act_id: _id});
+                activity = Activity.get({act_id: _id}).$promise.then(
+                    function(data){
+                    },
+                    function(error){
+                        alert(error.data);
+                    }
+                );
             },
             'get': function(){
                 return activity;
