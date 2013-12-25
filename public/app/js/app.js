@@ -36,13 +36,7 @@ angular.module('myApp', [
                 activity.name = 'default_name';
             },
             'init': function(_id){
-                activity = Activity.get({act_id: _id}).$promise.then(
-                    function(data){
-                    },
-                    function(error){
-                        alert(error.data);
-                    }
-                );
+                return activity = Activity.get({act_id: _id});
             },
             'get': function(){
                 return activity;

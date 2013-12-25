@@ -7,7 +7,6 @@ angular.module('myApp.controllers', ['ngResource']).
 
     }])
     .controller('MyCtrl2', [function() {
-
     }])
     .controller('NewActCtrl',['$scope', 'ActivityService', '$location', function($scope, act_ser, $location) {
         act_ser.remove();
@@ -27,7 +26,14 @@ angular.module('myApp.controllers', ['ngResource']).
     .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams',function($scope, act_ser, $routeParams) {
         $scope.act = act_ser.get();
         if(act_ser.act_id != $routeParams.act_id){
-            act_ser.init($routeParams.act_id);
+            $scope.act = act_ser.init($routeParams.act_id);
+            $scope.act.$promise.then(
+                    function(data){
+                    },
+                    function(error){
+                        alert(error.data);
+                    }
+                );
         }
         $scope.save_act = function(){
             $scope.act.$save();
