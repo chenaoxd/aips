@@ -21,9 +21,10 @@ function newact(req, res){
             return res.redirect('/');
         }
         res.send({
-            'name': act.name,
-            'security_key': act.securityKey,
-            'act_id': act._id
+            name: act.name,
+            security_key: act.securityKey,
+            act_id: act._id,
+            s_form: act.s_form
         });
     });
 }
@@ -37,9 +38,10 @@ function save_info(req, res){
        act.securityKey = req.body.security_key;
        act.save();
        res.send({
-           'name': act.name,
-           'security_key': act.securityKey,
-           'act_id': act._id
+           name: act.name,
+           security_key: act.securityKey,
+           act_id: act._id,
+           s_form: act.s_form
        })
    });
 }
@@ -52,7 +54,8 @@ function get_act(req, res){
         res.send({
             name: act.name,
             security_key: act.securityKey,
-            act_id: act._id
+            act_id: act._id,
+            s_form: act.s_form
         });
     });
 }

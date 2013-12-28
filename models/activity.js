@@ -18,7 +18,10 @@ function Activity(act) {
         console.log('s_form in ....');
         this.s_form = act.s_form.parseJSON();
     }else{
-        this.s_form = {'name':1, 'phone':1};
+        this.s_form = [
+            {'label': 'name', 'display':'姓名', 'type': 'text', 'required': 1},
+            {'label': 'phonenum', 'display':'手机号', 'type': 'text', 'required': 1}
+        ];
     }
 };
 

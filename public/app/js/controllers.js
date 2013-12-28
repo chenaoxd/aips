@@ -18,7 +18,7 @@ angular.module('myApp.controllers', ['ngResource']).
                     $location.url('/act_info/'+$scope.new_act.act_id);
                 },
                 function(error){
-                    alert(error.data)
+                    alert(error.data);
                 }
             );
         };
@@ -26,7 +26,7 @@ angular.module('myApp.controllers', ['ngResource']).
     .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams',function($scope, act_ser, $routeParams) {
         $scope.act = act_ser.get();
         if(act_ser.act_id != $routeParams.act_id){
-            $scope.act = act_ser.init($routeParams.act_id);
+            $scope.act = act_ser.pull($routeParams.act_id);
             $scope.act.$promise.then(
                     function(data){
                     },
@@ -38,5 +38,26 @@ angular.module('myApp.controllers', ['ngResource']).
         $scope.save_act = function(){
             $scope.act.$save();
         };
+        $scope.sign_url = function(){
+            return "/sign_act/";
+        };
 //        console.log($scope.act.name);
+    }])
+    .controller('SignActCtrl', ['$scope', 'ActivityService', '$routeParams', 'RegistrationService', function($scope, act_ser, $routeParams, RegSer){
+        $scope.act = act_ser.get();
+        $scope.formData = {};
+        if(act_ser.act_id != $routeParams.act_id){
+            $scope.act = act_ser.pull($routeParams.act_id);
+            $scope.act.$promise.then(
+                    function(data){
+                    },
+                    function(error){
+                        alert(error.data);
+                    }
+                );
+        }
+        $scope.submit_sign = function(){
+            $scope.reg = RegSer.init($scope.formData, $routeParams.act_id);
+            console.log($scope.reg);
+        };
     }]);
