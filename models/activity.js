@@ -1,10 +1,11 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var actSchema = new mongoose.Schema({
     name: String,
     securityKey: String,
-    s_form: Object
+    s_form: Schema.Types.Mixed
 }, {
     collection: 'activity'
 });

@@ -28,7 +28,7 @@ angular.module('myApp', [
     }]).
     factory('RegistrationForm', ['$resource', 'api_prefix', function($resource, api_prefix){
         return $resource(api_prefix + '/registration/:act_id/:reg_id',
-                        {'act_id': 'act_id', 'reg_id': '@reg_id'});
+                        {'act_id': '@act_id', 'reg_id': '@reg_id'});
     }]).
     service('ActivityService',['Activity', function(Activity) {
         console.log('act_service runing...');
@@ -72,10 +72,9 @@ angular.module('myApp', [
             'new': function(){
                 return reg_form = new RegForm();
             },
-            'init': function(formData, act_id){
-                reg_form = new RegForm(formData);
-                reg_form['act_id'] = act_id;
-                return reg_form;
+            'init': function(content){
+                return reg_form = new RegForm(content);
+                console.log(reg_form);
             },
             'save': function(){
                 return reg_form.$save();

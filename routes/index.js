@@ -1,4 +1,5 @@
 activity = require('./activity');
+registration = require('./registration');
 settings = require('../settings.js');
 
 module.exports = function(app){
@@ -6,6 +7,7 @@ module.exports = function(app){
     app.post('/api/activity', activity.newact);
     app.get('/api/activity/:id', activity.get_act);
     app.post('/api/activity/:id', activity.save_info);
+    app.post('/api/registration/:act_id', registration.sub_form);
 //    app.get('/viewact/:id', activity.viewact);
 //    app.post('/subform/:id', activity.subform);
 //    app.get('/actinfo/:id', activity.actinfo);

@@ -77,6 +77,8 @@ function viewact(req, res){
     });
 }
 
+
+//Todo: too old ,need to remove 
 function subform(req, res){
     var content = req.body;
     var actID = req.params.id;
