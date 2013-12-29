@@ -1,0 +1,15 @@
+<div>
+  <legend>报名统计</legend>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th ng-repeat="item in act.s_form">{{item.display}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="reg_info in reg_list">
+        <td ng-repeat="item in act.s_form">{{reg_info.form_data[item.label]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

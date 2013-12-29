@@ -1,5 +1,5 @@
 <link href="/css/act_info.css" rel="stylesheet"/>
-<div ng-controller="ActInfoCtrl">
+<div>
   <legend>Activity Information</legend>
   <form class="form-horizontal" ng-submit="save_act()">
     <div class="form-group">
@@ -27,9 +27,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-lg-2">security key</label>
+      <label class="control-label col-lg-2">报名统计</label>
       <div class="col-lg-3">
-        <input type="text" class="form-control" ng-model='act.security_key' required>
+        <a href="/sign_info/{{act.act_id}}">报名统计</a>
       </div>
     </div>
     <div class="form-group">

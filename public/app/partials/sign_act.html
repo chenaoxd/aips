@@ -1,13 +1,11 @@
-<div ng-controller="SignActCtrl">
+<div>
   <legend>活动报名</legend>
   <form class="form-horizontal" ng-submit="submit_sign()">
     
-    <div ng-repeat="form_instance in act.s_form">
-      <div class="form-group">
-        <label class="control-label col-lg-2">{{form_instance.display}}</label>
-        <div class="col-lg-2">
-          <input type="text" class="form-control" ng-model="formData[form_instance.label]">
-        </div>
+    <div class="form-group" ng-repeat="form_instance in act.s_form">
+      <label class="control-label col-lg-2">{{form_instance.display}}</label>
+      <div class="col-lg-2">
+        <input type="text" class="form-control" ng-model="formData[form_instance.label]">
       </div>
     </div>
 

@@ -41,4 +41,13 @@ RegistrationForm.get = function(id, callback) {
     });
 };
 
+RegistrationForm.getListByAct = function(act_id, callback) {
+    regModel.find({act_id: act_id}, function(err, reg_list){
+        if(err){
+            return callback(err);
+        }
+        callback(null, reg_list);
+    });
+};
+
 module.exports = RegistrationForm;

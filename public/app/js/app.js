@@ -19,6 +19,7 @@ angular.module('myApp', [
         $routeProvider.when('/', {templateUrl:'/partials/newact.html', controller:'NewActCtrl'});
         $routeProvider.when('/act_info/:act_id', {templateUrl: '/partials/act_info.html', controller: 'ActInfoCtrl'});
         $routeProvider.when('/sign_act/:act_id', {templateUrl: '/partials/sign_act.html', controller: 'SignActCtrl'});
+        $routeProvider.when('/sign_info/:act_id', {templateUrl: '/partials/reg_info.html', controller: 'RegInfoCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
         
     }]).
@@ -28,7 +29,7 @@ angular.module('myApp', [
     }]).
     factory('RegistrationForm', ['$resource', 'api_prefix', function($resource, api_prefix){
         return $resource(api_prefix + '/registration/:act_id/:reg_id',
-                        {'act_id': '@act_id', 'reg_id': '@reg_id'});
+                         {'act_id': '@act_id', 'reg_id': '@reg_id'});
     }]).
     service('ActivityService',['Activity', function(Activity) {
         console.log('act_service runing...');
@@ -43,7 +44,18 @@ angular.module('myApp', [
             'pull': function(_id){
                 return activity = Activity.get({act_id: _id});
             },
-            'get': function(){
+            'get': function(act_id){
+                if(activity.act_id != act_id){
+                    activity = new Activity();
+                    activity = Activity.get({act_id: act_id});
+                    activity.$promise.then(
+                        function(data){
+                        },
+                        function(error){
+                            console.log(error.data);
+                        }
+                    );
+                }
                 return activity;
             },
             'new': function(){
@@ -66,7 +78,11 @@ angular.module('myApp', [
             'pull': function(act_id, reg_id){
                 return reg_form = RegForm.get({act_id: act_id, reg_id: reg_id});
             },
-            'get': function(){
+            'get': function(act_id){
+                if(reg_form.act_id != act_id){
+                    reg_form = new RegForm();
+                    reg_form.act_id = act_id;
+                }
                 return reg_form;
             },
             'new': function(){
@@ -74,10 +90,15 @@ angular.module('myApp', [
             },
             'init': function(content){
                 return reg_form = new RegForm(content);
-                console.log(reg_form);
             },
             'save': function(){
                 return reg_form.$save();
+            },
+            'query': function(){
+                return RegForm.query({act_id: reg_form.act_id});
+            },
+            'show': function(){
+                console.log(reg_form);
             }
         };
     }]);

@@ -8,6 +8,7 @@ module.exports = function(app){
     app.get('/api/activity/:id', activity.get_act);
     app.post('/api/activity/:id', activity.save_info);
     app.post('/api/registration/:act_id', registration.sub_form);
+    app.get('/api/registration/:act_id', registration.get_registrations);
 //    app.get('/viewact/:id', activity.viewact);
 //    app.post('/subform/:id', activity.subform);
 //    app.get('/actinfo/:id', activity.actinfo);

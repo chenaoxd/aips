@@ -1,4 +1,5 @@
 var RegForm = require('../models/registration.js');
+var Activity = require('../models/activity.js');
 
 function sub_form(req, res){
     var form_data = req.body.form_data;
@@ -22,4 +23,18 @@ function sub_form(req, res){
     });
 }
 
+function get_registrations(req, res){
+    Activity.get(req.params.act_id, function(err, act){
+        if(!act){
+            res.send('No activity: '+ req.params.act_id);
+            console.log(req.body);
+            return ;
+        }
+        RegForm.getListByAct(act._id, function(err, form_list){
+            res.send(form_list);
+        });
+    });
+}
+
 exports.sub_form = sub_form;
+exports.get_registrations = get_registrations;
