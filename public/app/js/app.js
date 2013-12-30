@@ -9,7 +9,8 @@ angular.module('myApp', [
     'myApp.directives',
     'myApp.controllers'
 ]).
-    constant('api_prefix','/api').
+    constant('api_prefix', '/api').
+    constant('dz_host', 'http://aips.wooqu.org').
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {       
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix = '';

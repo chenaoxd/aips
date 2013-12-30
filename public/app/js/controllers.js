@@ -23,7 +23,8 @@ angular.module('myApp.controllers', ['ngResource']).
             );
         };
     }])
-    .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams',function($scope, ActSer, $routeParams) {
+    .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams', 'dz_host', function($scope, ActSer, $routeParams, dz_host) {
+        $scope.dz_host = dz_host;
         $scope.act = ActSer.get($routeParams.act_id);
         $scope.save_act = function(){
             $scope.act.$save();
