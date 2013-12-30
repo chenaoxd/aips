@@ -14,7 +14,7 @@ angular.module('myApp.controllers', ['ngResource']).
         $scope.newAct = function(){
             act_ser.save().then(
                 function(data){
-//                    $location.url('/act_info');
+                    //                    $location.url('/act_info');
                     $location.url('/act_info/'+$scope.new_act.act_id);
                 },
                 function(error){
@@ -31,14 +31,13 @@ angular.module('myApp.controllers', ['ngResource']).
         $scope.sign_url = function(){
             return "/sign_act/";
         };
-//        console.log($scope.act.name);
+        //        console.log($scope.act.name);
     }])
     .controller('SignActCtrl', ['$scope', 'ActivityService', '$routeParams', 'RegistrationService', function($scope, ActSer, $routeParams, RegSer){
         $scope.act = ActSer.get($routeParams.act_id);
-        $scope.formData = {};
+        $scope.form_data = {};
         $scope.submit_sign = function(){
-            $scope.reg = RegSer.init({'form_data':$scope.formData, 'act_id':$routeParams.act_id});
-            console.log($scope.reg);
+            $scope.reg = RegSer.init({'form_data':$scope.form_data, 'act_id':$routeParams.act_id});
             RegSer.save();
         };
     }])
@@ -46,4 +45,22 @@ angular.module('myApp.controllers', ['ngResource']).
         $scope.act = ActSer.get($routeParams.act_id);
         RegSer.init({act_id: $routeParams.act_id});
         $scope.reg_list = RegSer.query();
+    }])
+    .controller('ModRegCtrl', ['$scope', 'ActivityService', '$routeParams', function($scope, ActSer, $routeParams){
+        $scope.act = ActSer.get($routeParams.act_id);
+        //        console.log('ModRegCtrl');
+        $scope.form_data = {};
+        $scope.save_form = function(){
+            $scope.act.$save();
+        };
+        $scope.check_list = function(form_list){
+            var check_list = [];
+            for(var index in form_list){
+                if(form_list[index]['label'] in check_list){
+                    return false;
+                }
+                check_list.push(form_list[index]['label']);
+            }
+            return true;
+        };
     }]);

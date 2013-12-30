@@ -36,13 +36,14 @@ function save_info(req, res){
        }
        act.name = req.body.name;
        act.securityKey = req.body.security_key;
+       act.s_form = req.body.s_form;
        act.save();
        res.send({
            name: act.name,
            security_key: act.securityKey,
            act_id: act._id,
            s_form: act.s_form
-       })
+       });
    });
 }
 

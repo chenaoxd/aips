@@ -20,6 +20,7 @@ angular.module('myApp', [
         $routeProvider.when('/act_info/:act_id', {templateUrl: '/partials/act_info.html', controller: 'ActInfoCtrl'});
         $routeProvider.when('/sign_act/:act_id', {templateUrl: '/partials/sign_act.html', controller: 'SignActCtrl'});
         $routeProvider.when('/sign_info/:act_id', {templateUrl: '/partials/reg_info.html', controller: 'RegInfoCtrl'});
+        $routeProvider.when('/mod_reg/:act_id', {templateUrl: '/partials/mod_reg.html', controller: 'ModRegCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
         
     }]).
@@ -101,4 +102,31 @@ angular.module('myApp', [
                 console.log(reg_form);
             }
         };
-    }]);
+    }]).
+    directive('dzRegForm', function(){
+        return {
+            restrict: 'E',
+            scope: {
+                form_list: '=sform',
+                form_data: '=formData'
+            },
+            templateUrl: '/partials/form_dir.html'
+        };
+    }).
+    directive('dzRegEdit', function(){
+        return {
+            restrict: 'E',
+            scope: {
+                form_list: '=sform'
+            },
+            controller: function($scope){
+                $scope.list_remove = function(index){
+                    $scope.form_list.splice(index, 1);
+                };
+                $scope.list_add = function(){
+                    $scope.form_list.push({type: 'text', label: 'label', required: '1', display: 'display'});
+                };
+            },
+            templateUrl: 'partials/form_edit.html'
+        };
+    });
