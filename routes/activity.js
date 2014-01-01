@@ -4,6 +4,7 @@ var settings = require('../settings');
 var mongoose = require('mongoose');
 var helper = require('../helper/basehelper.js');
 var crypto = require('crypto');
+var send_cloud = require('../helper/send_cloud.js');
 
 function main(req, res){
     res.render('index', {title: 'main'});
@@ -152,6 +153,21 @@ function modform(req, res){
     });
 }
 
+function send_mail_test(req, res){
+    send_cloud.send_mail('chenao3220@gmail.com', 'test_callback', 'test_callback', function(_data){
+        res.send(_data);
+    });
+}
+
+function send_mail(req, res){
+    Activity.get(req.params.act_id, function(err, act){
+        if(!act){
+            res.status(404).send('No such activity');
+        }
+    });
+    res.send({'message':'No such function'});
+}
+
 exports.main = main;
 exports.newact = newact;
 exports.viewact = viewact;
@@ -161,3 +177,4 @@ exports.statistics = statistics;
 exports.modform = modform;
 exports.save_info = save_info;
 exports.get_act = get_act;
+exports.send_mail = send_mail;

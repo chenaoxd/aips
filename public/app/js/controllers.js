@@ -23,7 +23,8 @@ angular.module('myApp.controllers', ['ngResource']).
             );
         };
     }])
-    .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams', 'dz_host', function($scope, ActSer, $routeParams, dz_host) {
+    .controller('ActInfoCtrl', ['$scope', 'ActivityService', '$routeParams', 'dz_host', '$http', function($scope, ActSer, $routeParams, dz_host, $http) {
+        $scope.mail_to = '';
         $scope.dz_host = dz_host;
         $scope.act = ActSer.get($routeParams.act_id);
         $scope.save_act = function(){
@@ -31,6 +32,17 @@ angular.module('myApp.controllers', ['ngResource']).
         };
         $scope.sign_url = function(){
             return "/sign_act/";
+        };
+        $scope.send_mail = function(){
+            $http({method: 'GET', url: '/api/send_mail/' + $scope.act.act_id}).
+                success(function(data, status, headers, config){
+                    if(data.message == 'success'){
+                        alert('发送成功');
+                    }
+                }).
+                error(function(data, status, headers, config){
+                    alert(data);
+                });
         };
         //        console.log($scope.act.name);
     }])
