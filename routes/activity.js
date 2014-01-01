@@ -164,8 +164,14 @@ function send_mail(req, res){
         if(!act){
             res.status(404).send('No such activity');
         }
+        var html = '';
+        html += 'Activity_id: ' + act._id + '<br/>';
+        html += 'Activity_name: ' + act.name + '<br/>';
+        html += 'Activity_url: <a href="' + settings.baseUrl + 'act_info/' + act._id + '">点击查看详细信息</a>';
+        send_cloud.send_mail(req.body.email, act.name + ' 基本信息', html, function(_data){
+            res.send(_data);
+        });
     });
-    res.send({'message':'No such function'});
 }
 
 exports.main = main;
