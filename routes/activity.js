@@ -177,7 +177,7 @@ function send_info(req, res){
 }
 
 function add_gcalendar(req, res){
-    res.send('add_gcalendar');
+    gcalendar.add_gcalendar(req.body.access_token);
 }
 
 function testgca(req, res){

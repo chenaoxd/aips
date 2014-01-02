@@ -94,7 +94,11 @@ angular.module('myApp.controllers', ['ngResource']).
             return true;
         };
     }])
-    .controller('GoogleOauthCtrl', ['$scope', '$location', function($scope, $location){
+    .controller('GoogleOauthCtrl', ['$scope', '$location', '$http', function($scope, $location, $http){
         var get_params = $location.search();
         $scope.access_token = get_params.code;
+        $http.post('/api/activity/adsfadsfadsfasdf/add_gcalendar',{'access_token': $scope.access_token},function(data){
+            console.log(data);
+        });
+        
     }]);
