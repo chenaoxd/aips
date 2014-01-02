@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var helper = require('../helper/basehelper.js');
 var crypto = require('crypto');
 var send_cloud = require('../helper/send_cloud.js');
+var gcalendar = require('../helper/googlecalendar');
 
 function main(req, res){
     res.render('index', {title: 'main'});
@@ -175,6 +176,14 @@ function send_info(req, res){
     });
 }
 
+function add_gcalendar(req, res){
+    res.send('add_gcalendar');
+}
+
+function testgca(req, res){
+    require('../helper/googlecalendar.js');
+}
+
 exports.main = main;
 exports.newact = newact;
 exports.viewact = viewact;
@@ -186,3 +195,5 @@ exports.save_info = save_info;
 exports.get_act = get_act;
 exports.send_mail = send_mail;
 exports.send_info = send_info;
+exports.testgca = testgca;
+exports.add_gcalendar = add_gcalendar;
