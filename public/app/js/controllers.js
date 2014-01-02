@@ -95,6 +95,6 @@ angular.module('myApp.controllers', ['ngResource']).
         };
     }])
     .controller('GoogleOauthCtrl', ['$scope', '$location', function($scope, $location){
-        var get_parms = $location.search();
+        var get_params = $location.search();
         $scope.access_token = get_params.code;
     }]);
