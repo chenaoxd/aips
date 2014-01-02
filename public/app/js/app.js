@@ -4,6 +4,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
     'ngRoute',
+    'ngCookies',
     'myApp.filters',
     'myApp.services',
     'myApp.directives',
@@ -22,6 +23,7 @@ angular.module('myApp', [
         $routeProvider.when('/sign_act/:act_id', {templateUrl: '/partials/sign_act.html', controller: 'SignActCtrl'});
         $routeProvider.when('/sign_info/:act_id', {templateUrl: '/partials/reg_info.html', controller: 'RegInfoCtrl'});
         $routeProvider.when('/mod_reg/:act_id', {templateUrl: '/partials/mod_reg.html', controller: 'ModRegCtrl'});
+        $routeProvider.when('/googleoauth/callback', {templateUrl: '/partials/googleoauth.html', controller: 'GoogleOauthCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
         
     }]).

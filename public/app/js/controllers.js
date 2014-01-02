@@ -46,10 +46,11 @@ angular.module('myApp.controllers', ['ngResource']).
         };
         //        console.log($scope.act.name);
     }])
-    .controller('SignActCtrl', ['$scope', 'ActivityService', '$routeParams', 'RegistrationService', '$http', function($scope, ActSer, $routeParams, RegSer, $http){
+    .controller('SignActCtrl', ['$scope', 'ActivityService', '$routeParams', 'RegistrationService', '$http', '$cookieStore', '$location',function($scope, ActSer, $routeParams, RegSer, $http, $cookiestore, $location){
         $scope.sendmail = 'false';
         $scope.act = ActSer.get($routeParams.act_id);
         $scope.form_data = {};
+        $cookiestore.put('back_to_url', $location.url());
         $scope.submit_sign = function(){
             if($scope.sendmail == true){
                 $http.post('/api/activity/' + $scope.act.act_id + '/send_info', {'email': $scope.mail_to}).
@@ -66,7 +67,7 @@ angular.module('myApp.controllers', ['ngResource']).
             RegSer.save();
         };
     }])
-    .controller('RegInfoCtrl', ['$scope', 'ActivityService', 'RegistrationService', '$routeParams', function($scope, ActSer, RegSer, $routeParams){
+    .controller('RegInfoCtrl', ['$scope', 'ActivityService', 'RegistrationService', '$routeParams', '$cookieStore', '$location', function($scope, ActSer, RegSer, $routeParams, $cookiestore, $location){
         $scope.act = ActSer.get($routeParams.act_id);
         RegSer.init({act_id: $routeParams.act_id});
         $scope.reg_list = RegSer.query();
@@ -92,4 +93,8 @@ angular.module('myApp.controllers', ['ngResource']).
             }
             return true;
         };
+    }])
+    .controller('GoogleOauthCtrl', ['$scope', '$location', function($scope, $location){
+        var get_parms = $location.search();
+        $scope.access_token = get_params.code;
     }]);
