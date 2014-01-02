@@ -38,6 +38,8 @@ angular.module('myApp.controllers', ['ngResource']).
                 success(function(data, status, headers, config){
                     if(data.message == 'success'){
                         alert('发送成功');
+                    }else{
+                        alert('发送邮件失败： ' + JSON.stringify(data.errors));
                     }
                 }).
                 error(function(data, status, headers, config){
@@ -57,6 +59,8 @@ angular.module('myApp.controllers', ['ngResource']).
                     success(function(data, status, headers, config){
                         if(data.message == 'success'){
                             alert('发送成功');
+                        }else{
+                            alert('发送邮件失败: ' + JSON.stringify(data.errors));
                         }
                     }).
                     error(function(data, status, headers, config){
@@ -65,6 +69,7 @@ angular.module('myApp.controllers', ['ngResource']).
             }
             $scope.reg = RegSer.init({'form_data':$scope.form_data, 'act_id':$routeParams.act_id});
             RegSer.save();
+            alert('报名成功');
         };
     }])
     .controller('RegInfoCtrl', ['$scope', 'ActivityService', 'RegistrationService', '$routeParams', '$cookieStore', '$location', function($scope, ActSer, RegSer, $routeParams, $cookiestore, $location){
@@ -79,6 +84,7 @@ angular.module('myApp.controllers', ['ngResource']).
         $scope.save_form = function(){
             if(check_list($scope.act.s_form)){
                 $scope.act.$save();
+                alert('修改报名表成功');
             }else{
                 alert('不能有重名label');
             }

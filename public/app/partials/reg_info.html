@@ -5,11 +5,13 @@
     <thead>
       <tr>
         <th ng-repeat="item in act.s_form">{{item.display}}</th>
+        <th>状态</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="reg_info in reg_list">
         <td ng-repeat="item in act.s_form">{{reg_info.form_data[item.label]}}</td>
+        <td>{{reg_info.state}}</td>
       </tr>
     </tbody>
   </table>
