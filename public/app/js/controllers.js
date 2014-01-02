@@ -34,7 +34,7 @@ angular.module('myApp.controllers', ['ngResource']).
             return "/sign_act/";
         };
         $scope.send_mail = function(){
-            $http.post('/api/send_mail/' + $scope.act.act_id, {'email': $scope.mail_to}).
+            $http.post('/api/activity/' + $scope.act.act_id + '/send_base', {'email': $scope.mail_to}).
                 success(function(data, status, headers, config){
                     if(data.message == 'success'){
                         alert('发送成功');
