@@ -12,7 +12,7 @@ module.exports = function(app){
     app.get('/api/registration/:act_id/csv', registration.get_registrations_csv);
     app.post('/api/activity/:act_id/send_base', activity.send_mail);
     app.post('/api/activity/:act_id/send_info', activity.send_info);
-    app.get('/api/activity/:act_id/add_gcalendar', activity.add_gcalendar);
+    app.post('/api/activity/:act_id/add_gcalendar', activity.add_gcalendar);
     app.get('/api/testgca', activity.testgca);
 //    app.get('/api/test/email', activity.send_mail);
 //    app.get('/viewact/:id', activity.viewact);
