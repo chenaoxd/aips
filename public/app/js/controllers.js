@@ -46,10 +46,22 @@ angular.module('myApp.controllers', ['ngResource']).
         };
         //        console.log($scope.act.name);
     }])
-    .controller('SignActCtrl', ['$scope', 'ActivityService', '$routeParams', 'RegistrationService', function($scope, ActSer, $routeParams, RegSer){
+    .controller('SignActCtrl', ['$scope', 'ActivityService', '$routeParams', 'RegistrationService', '$http', function($scope, ActSer, $routeParams, RegSer, $http){
+        $scope.sendmail = 'false';
         $scope.act = ActSer.get($routeParams.act_id);
         $scope.form_data = {};
         $scope.submit_sign = function(){
+            if($scope.sendmail == true){
+                $http.post('/api/activity/' + $scope.act.act_id + '/send_info', {'email': $scope.mail_to}).
+                    success(function(data, status, headers, config){
+                        if(data.message == 'success'){
+                            alert('发送成功');
+                        }
+                    }).
+                    error(function(data, status, headers, config){
+                        alert(data);
+                    });
+            }
             $scope.reg = RegSer.init({'form_data':$scope.form_data, 'act_id':$routeParams.act_id});
             RegSer.save();
         };

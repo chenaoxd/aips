@@ -152,9 +152,9 @@ function send_mail(req, res){
             res.status(404).send('No such activity');
         }
         var html = '';
-        html += 'Activity_id: ' + act._id + '<br/>';
-        html += 'Activity_name: ' + act.name + '<br/>';
-        html += 'Activity_url: <a href="' + settings.baseUrl + 'act_info/' + act._id + '">点击查看详细信息</a>';
+        html += '活动ID: ' + act._id + '<br/>';
+        html += '活动标题: ' + act.name + '<br/>';
+        html += '详细信息: <a href="' + settings.baseUrl + 'act_info/' + act._id + '">点击查看详细信息</a>';
         send_cloud.send_mail(req.body.email, act.name + ' 基本信息', html, function(_data){
             res.send(_data);
         });
@@ -167,9 +167,8 @@ function send_info(req, res){
             res.status(404).send('No such activity');
         }
         var html = '';
-        html += 'Activity_id: ' + act._id + '<br/>';
-        html += 'Activity_name: ' + act.name + '<br/>';
-        html += 'Description: ' + act.description;
+        html += '活动标题: ' + act.name + '<br/>';
+        html += '活动介绍: ' + act.description;
         send_cloud.send_mail(req.body.email, act.name + ' 基本信息', html, function(_data){
             res.send(_data);
         });

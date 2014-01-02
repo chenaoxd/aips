@@ -2,7 +2,7 @@
   <div class="form-group" ng-repeat="form_instance in form_list">
     <label class="control-label col-lg-2">{{form_instance.display}}</label>
     <div class="col-lg-2">
-      <input type="text" class="form-control" ng-model="form_data[form_instance.label]">
+      <input type="text" class="form-control" ng-model="form_data[form_instance.label]" name="{{form_instance.label}}">
     </div>
   </div>
 </div>
