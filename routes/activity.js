@@ -21,12 +21,8 @@ function newact(req, res){
             req.flash('error', err);
             return res.redirect('/');
         }
-        res.send({
-            name: act.name,
-            security_key: act.securityKey,
-            act_id: act._id,
-            s_form: act.s_form
-        });
+        act = new Activity(act);
+        res.send(act.response_format());
     });
 }
 
@@ -35,10 +31,10 @@ function save_info(req, res){
        if(!act){
            res.status(404).send('save_info');
        }
-       act.name = req.body.name;
-       act.securityKey = req.body.security_key;
-       act.s_form = req.body.s_form;
+       Activity.set_data(req.body, act);
        act.save();
+       console.log(act);
+       act = new Activity(act);
        res.send(act.response_format());
    });
 }
@@ -48,12 +44,8 @@ function get_act(req, res){
         if(!act){
             res.status(404).send('No such act');
         }
-        res.send({
-            name: act.name,
-            security_key: act.securityKey,
-            act_id: act._id,
-            s_form: act.s_form
-        });
+        act = new Activity(act);
+        res.send(act.response_format());
     });
 }
 

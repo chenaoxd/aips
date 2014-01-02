@@ -61,7 +61,6 @@ Activity.prototype.save = function(callback) {
         if(err) {
             return callback(err);
         }
-        act = new Activity(act);
         callback(null, act);
     });
 };
@@ -71,15 +70,16 @@ Activity.get = function(id, callback) {
         if(err){
             return callback(err);
         }
-        act = new Activity(act);
         callback(null, act);
     });
 };
 
-Activity.prototype.set_data = function(act){
+Activity.set_data = function(act, model){
     for(var index in keys){
-        this[keys[index]] = act[keys[index]] || '';
+        model[keys[index]] = act[keys[index]] || '';
     }
+    model.securityKey = act.security_key;
+    
 };
 
 Activity.prototype.response_format = function(){
