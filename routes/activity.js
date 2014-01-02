@@ -161,6 +161,21 @@ function send_mail(req, res){
     });
 }
 
+function send_info(req, res){
+    Activity.get(req.params.act_id, function(err, act){
+        if(!act){
+            res.status(404).send('No such activity');
+        }
+        var html = '';
+        html += 'Activity_id: ' + act._id + '<br/>';
+        html += 'Activity_name: ' + act.name + '<br/>';
+        html += 'Description: ' + act.description;
+        send_cloud.send_mail(req.body.email, act.name + ' 基本信息', html, function(_data){
+            res.send(_data);
+        });
+    });
+}
+
 exports.main = main;
 exports.newact = newact;
 exports.viewact = viewact;
@@ -171,3 +186,4 @@ exports.modform = modform;
 exports.save_info = save_info;
 exports.get_act = get_act;
 exports.send_mail = send_mail;
+exports.send_info = send_info;

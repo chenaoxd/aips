@@ -64,12 +64,16 @@ angular.module('myApp.controllers', ['ngResource']).
         //        console.log('ModRegCtrl');
         $scope.form_data = {};
         $scope.save_form = function(){
-            $scope.act.$save();
+            if(check_list($scope.act.s_form)){
+                $scope.act.$save();
+            }else{
+                alert('不能有重名label');
+            }
         };
-        $scope.check_list = function(form_list){
+        var check_list = function(form_list){
             var check_list = [];
             for(var index in form_list){
-                if(form_list[index]['label'] in check_list){
+                if($.inArray(form_list[index]['label'], check_list) >= 0){
                     return false;
                 }
                 check_list.push(form_list[index]['label']);

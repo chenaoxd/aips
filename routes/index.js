@@ -10,9 +10,9 @@ module.exports = function(app){
     app.post('/api/registration/:act_id', registration.sub_form);
     app.get('/api/registration/:act_id', registration.get_registrations);
     app.get('/api/registration/:act_id/csv', registration.get_registrations_csv);
-//    app.get('/api/test/email', activity.send_mail);
     app.post('/api/activity/:act_id/send_base', activity.send_mail);
-    app.post('/api/activity/:act_id/send_info', activity.send_mail);
+    app.post('/api/activity/:act_id/send_info', activity.send_info);
+//    app.get('/api/test/email', activity.send_mail);
 //    app.get('/viewact/:id', activity.viewact);
 //    app.post('/subform/:id', activity.subform);
 //    app.get('/actinfo/:id', activity.actinfo);
