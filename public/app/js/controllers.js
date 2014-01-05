@@ -3,8 +3,14 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['ngResource']).
-    controller('MyCtrl1', [function() {
-
+    controller('MyCtrl1', ['$scope',function($scope) {
+        $scope.alerts = [
+            { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
+            { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
+        ];
+        $scope.closeAlert = function(index){
+            console.log(index);
+        };
     }])
     .controller('MyCtrl2', [function() {
     }])

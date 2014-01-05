@@ -1,1 +1,4 @@
 <p>This is the partial for view 1.</p>
+<div>
+  <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>

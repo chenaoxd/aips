@@ -4,6 +4,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
     'ngRoute',
+    'ui.bootstrap',
     'ngCookies',
     'myApp.filters',
     'myApp.services',
