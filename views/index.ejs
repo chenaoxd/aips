@@ -1,22 +1,30 @@
-<% include header %>
-<form class="form-horizontal" action="/newact" method="post">
-  <div class="form-group">
-    <label class="control-label col-lg-1">活动名</label>
-    <div class="col-lg-2">
-      <input type="text" name="act_name" class="form-control"/>
-    </div>
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIPS | wooqu.org</title>
+  <link rel="stylesheet" href="/css/base.css"/>
+  <link rel="stylesheet" href="/lib/bootstrap/bootstrap.min.css"/>
+  <script src="/lib/angular-1.2.6/angular.js"></script>
+  <script src="/lib/angular-1.2.6/angular-route.js"></script>
+  <script src="/lib/angular-1.2.6/angular-resource.js"></script>
+  <script src="/lib/angular-1.2.6/angular-cookies.min.js"></script>
+  <script src="/lib/bootstrap/ui-bootstrap-tpls-0.10.0.min.js"></script>
+  <script src="/lib/jquery.js"></script>
+</head>
+<body>
+  <div class="container" style="padding-top: 40px;">
+    <div ng-view></div>
   </div>
-  <div class="form-group">
-    <label class="control-label col-lg-1">密码</label>
-    <div class="col-lg-2">
-      <input type="text" name="security_key" class="form-control"/>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-lg-1"></label>
-    <div class="col-lg-2">
-      <button class="btn btn-default">创建活动</button>
-    </div>
-  </div>
-</form>
-<% include footer %>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  -->
+  <script src="/js/app.js"></script>
+  <script src="/js/services.js"></script>
+  <script src="/js/controllers.js"></script>
+  <script src="/js/filters.js"></script>
+  <script src="/js/directives.js"></script>
+</body>
+</html>

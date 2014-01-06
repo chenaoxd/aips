@@ -19,7 +19,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public/app')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 db.init();
@@ -29,16 +29,16 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.all('*', function(req, res, next){
-    if(req.path.substring(0, 4) == '/api'){
-        console.log('/api');
-        next();
-    }else{
-        res.sendfile(__dirname + '/public/app/index.html');
-    }
+app.get('/',function(req, res){
+    res.render("index");
 });
-
+app.get('/partials/:name',function(req, res){
+    res.sendfile(__dirname + '/views/partials/' + req.params.name);
+});
 routes(app);
+app.get('*',function(req, res){
+    res.render("index");
+});
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
