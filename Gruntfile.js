@@ -1,28 +1,23 @@
 module.exports = function(grunt) {
+
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        watch: {
-            scripts: {
-                files: ['*.js'],
-                tasks: ['start'],
+        nodemon: {
+            dev: {
                 options: {
-                    spawn: false
+                    file: 'app.js',
+                    nodeArgs: ['--debug'],
+                    env: {
+                        PORT: '3000'
+                    }
                 }
             }
-        }
+        },
+        watch: { /* nothing to do in watch anymore */ }
     });
-    // Load the plugin that provides the "watch" task.
-    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('start', function(){
-        grunt.util.spawn({
-            cmd: 'node',
-            args: ['app.js']
-        });
-        grunt.task.run('watch');
-    });
-    
-    // Default task(s).
-    grunt.registerTask('default', ['start']);
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-nodemon');
+
+    grunt.registerTask('default', ['nodemon']);
 };
