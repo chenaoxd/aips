@@ -8,6 +8,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var db = require('./models/db');
+var less_middleware = require('less-middleware');
 
 var app = express();
 
@@ -19,7 +20,12 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public/app')));
+app.use(less_middleware({
+    src: __dirname + "/public/app/less",
+    dest: __dirname + "/public/app/css",
+    compress: true
+}));
+app.use(express.static(path.join(__dirname, '/public/app')));
 app.use(app.router);
 
 db.init();
