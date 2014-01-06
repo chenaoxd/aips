@@ -1,5 +1,5 @@
 {
-    "name": "application-name",
+    "name": "aips",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -11,5 +11,9 @@
         "mongodb": "*",
         "mongoose": "*",
         "express-csv": "*"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-contrib-uglify": "~0.1.1"
     }
 }
