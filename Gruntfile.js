@@ -20,7 +20,7 @@ module.exports = function(grunt) {
                     yuicompress: true
                 },
                 files: {
-                    './public/css/test.css': './public/less/test.less'
+                    './public/css/base.css': './public/less/base.less'
                 }
             }
         },
@@ -35,5 +35,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-nodemon');
 
-    grunt.registerTask('default', ['less','watch']);
+    grunt.registerTask('default', ['nodemon']);
 };
