@@ -131,6 +131,6 @@ angular.module('myApp', [
                     $scope.form_list.push({type: 'text', label: 'label', required: '1', display: 'display'});
                 };
             },
-            templateUrl: 'partials/form_edit.html'
+            templateUrl: '/partials/form_edit.html'
         };
     });
