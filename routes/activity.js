@@ -28,22 +28,24 @@ function newact(req, res){
 }
 
 function save_info(req, res){
-   Activity.get(req.params.id, function(err, act){
-       if(!act){
-           res.status(404).send('save_info');
-       }
-       Activity.set_data(req.body, act);
-       act.save();
-       console.log(act);
-       act = new Activity(act);
-       res.send(act.response_format());
-   });
+    Activity.get(req.params.id, function(err, act){
+        if(!act){
+            res.status(404).send(helper.error(-1, 'No such act'));
+            return;
+        }
+        Activity.set_data(req.body, act);
+        act.save();
+        console.log(act);
+        act = new Activity(act);
+        res.send(act.response_format());
+    });
 }
 
 function get_act(req, res){
     Activity.get(req.params.id, function(err, act){
         if(!act){
-            res.status(404).send('No such act');
+            res.status(404).send(helper.error(-1, 'No such act'));
+            return;
         }
         act = new Activity(act);
         res.send(act.response_format());
@@ -53,8 +55,7 @@ function get_act(req, res){
 function viewact(req, res){
     Activity.get(req.params.id, function(err, act){
         if(!act){
-            res.send('No such activity:' + req.params.id);
-            console.log(req.body);
+            res.status(404).send(helper.error(-1, 'No such act'));
             return;
         }
         var context = {
@@ -68,89 +69,11 @@ function viewact(req, res){
 }
 
 
-//Todo: too old ,need to remove 
-function subform(req, res){
-    var content = req.body;
-    var actID = req.params.id;
-    var newForm = new Form({
-        actID: actID,
-        content: content
-    });
-    newForm.save(function(err, form) {
-        if(err){
-            req.flash('error', err);
-            return res.redirect('/');
-        }
-        res.send(form._id);
-    });
-}
-
-function actinfo(req, res){
-    Activity.get(req.params.id, function(err, act){
-        if(!act){
-            res.send('No such activity:' + req.params.id);
-            console.log(req.body);
-            return;
-        }
-        var context = {
-            act_id: act._id,
-            act_name: act.name,
-            sign_url: settings.baseUrl + 'viewact/' + act._id,
-            statistics_url: settings.baseUrl + 'statistics/' + act._id,
-            form_url: settings.baseUrl + 'modform/' + act._id,
-            title: act.name
-        };
-        res.render('actinfo', context);
-    });
-}
-
-function statistics(req, res){
-    Activity.get(req.params.id, function(err, act){
-        if(!act){
-            res.send('No Activity:' + req.params.id);
-            console.log(req.body);
-            return;
-        }
-        Form.getListByAct(act._id, function(err, formList){
-            
-            console.log(formList);
-            console.log(act);
-            var context = {
-                title: act.name,
-                s_form: act.s_form,
-                e_form_list: formList
-            };
-            res.render("statistics",context);
-        });
-    });
-}
-
-function modform(req, res){
-    Activity.get(req.params.id, function(err, act){
-        if(!act){
-            res.send('No such activity' + req.params.id);
-            console.log(req.body);
-            return;
-        }
-        var context = {
-            act_name: act.name,
-            title: act.name,
-            s_form: JSON.stringify(act.s_form)
-        };
-        res.render('modform',context);
-    });
-}
-
-function send_mail_test(req, res){
-    send_cloud.send_mail('chenao3220@gmail.com', 'test_callback', 'test_callback', function(_data){
-        res.send(_data);
-    });
-}
-
 function send_mail(req, res){
     Activity.get(req.params.act_id, function(err, act){
         if(!act){
-            res.status(404).send('No such activity');
+            res.status(404).send(helper.error(-1, 'No such act'));
+            return;
         }
         var html = '';
         html += '活动ID: ' + act._id + '<br/>';
@@ -165,7 +88,8 @@ function send_mail(req, res){
 function send_info(req, res){
     Activity.get(req.params.act_id, function(err, act){
         if(!act){
-            res.status(404).send('No such activity');
+            res.status(404).send(helper.error(-1, 'No such act'));
+            return;
         }
         var html = '';
         html += '活动标题: ' + act.name + '<br/>';
@@ -180,20 +104,11 @@ function add_gcalendar(req, res){
     gcalendar.add_gcalendar(req.body.access_token);
 }
 
-function testgca(req, res){
-    require('../helper/googlecalendar.js');
-}
-
 exports.main = main;
 exports.newact = newact;
 exports.viewact = viewact;
-exports.subform = subform;
-exports.actinfo = actinfo;
-exports.statistics = statistics;
-exports.modform = modform;
 exports.save_info = save_info;
 exports.get_act = get_act;
 exports.send_mail = send_mail;
 exports.send_info = send_info;
-exports.testgca = testgca;
 exports.add_gcalendar = add_gcalendar;

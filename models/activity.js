@@ -1,6 +1,8 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var helper = require('../helper/basehelper.js');
+
 
 var actSchema = new mongoose.Schema({
     name: String,
@@ -69,6 +71,18 @@ Activity.get = function(id, callback) {
     actModel.findOne({_id: mongoose.Types.ObjectId(id)}, function(err, act){
         if(err){
             return callback(err);
+        }
+        callback(null, act);
+    });
+};
+
+Activity.check_security_key = function(id, req, res){
+    actModel.findOne({_id: mongoose.Types.ObjectId(id)}, function(){
+        if(err){
+            return callback(err);
+        }
+        if(!act){
+            res.status(404).send('');
         }
         callback(null, act);
     });
