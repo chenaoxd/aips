@@ -23,7 +23,7 @@ function newact(req, res){
             return res.redirect('/');
         }
         act = new Activity(act);
-        res.send(act.response_format());
+        res.send(act.response_format(req));
     });
 }
 
@@ -37,7 +37,7 @@ function save_info(req, res){
         act.save();
         console.log(act);
         act = new Activity(act);
-        res.send(act.response_format());
+        res.send(act.response_format(req));
     });
 }
 
@@ -48,9 +48,8 @@ function get_act(req, res){
             return;
         }
         act = new Activity(act);
-        console.log(act.check_security_key(req.params.id, req));
-        req.session[act._id] = act.security_key;
-        res.send(act.response_format());
+        //console.log(act.check_security_key(req.params.id, req));
+        res.send(act.response_format(req));
     });
 }
 

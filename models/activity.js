@@ -76,11 +76,15 @@ Activity.get = function(id, callback) {
     });
 };
 
+Activity.prototype.set_security_key = function(){
+    req.session[this._id] = this.security_key;
+};
+
 Activity.prototype.check_security_key = function(id, req){
     if(!(id in req.session) || ((id in req.session) && (req.session[id] != this.security_key))){
-        return -1;
+        return false;
     }
-    return 1;
+    return true;
 };
 
 Activity.set_data = function(act, model){
@@ -91,12 +95,14 @@ Activity.set_data = function(act, model){
     
 };
 
-Activity.prototype.response_format = function(){
+Activity.prototype.response_format = function(req){
     var response_body = {};
     for(var index in keys){
         response_body[keys[index]] = this[keys[index]];
     }
-    response_body.security_key = this.security_key || '';
+    if(!this.check_security_key(this._id, req)){
+        response_body.security_key = '';
+    }
     response_body.act_id = this._id;
     return response_body;
 };
