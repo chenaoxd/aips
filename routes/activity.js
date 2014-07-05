@@ -30,7 +30,7 @@ function newact(req, res){
 function save_info(req, res){
     Activity.get(req.params.id, function(err, act){
         if(!act){
-            res.status(404).send(helper.error(-1, 'No such act'));
+            res.status(404).send(helper.only_error(-1, 'No such act'));
             return;
         }
         Activity.set_data(req.body, act);
@@ -44,7 +44,7 @@ function save_info(req, res){
 function get_act(req, res){
     Activity.get(req.params.id, function(err, act){
         if(!act){
-            res.status(404).send(helper.error(-1, 'No such act'));
+            res.status(404).send(helper.only_error(-1, 'No such act'));
             return;
         }
         act = new Activity(act);
@@ -55,7 +55,7 @@ function get_act(req, res){
 function viewact(req, res){
     Activity.get(req.params.id, function(err, act){
         if(!act){
-            res.status(404).send(helper.error(-1, 'No such act'));
+            res.status(404).send(helper.only_error(-1, 'No such act'));
             return;
         }
         var context = {
@@ -72,7 +72,7 @@ function viewact(req, res){
 function send_mail(req, res){
     Activity.get(req.params.act_id, function(err, act){
         if(!act){
-            res.status(404).send(helper.error(-1, 'No such act'));
+            res.status(404).send(helper.only_error(-1, 'No such act'));
             return;
         }
         var html = '';
@@ -88,7 +88,7 @@ function send_mail(req, res){
 function send_info(req, res){
     Activity.get(req.params.act_id, function(err, act){
         if(!act){
-            res.status(404).send(helper.error(-1, 'No such act'));
+            res.status(404).send(helper.only_error(-1, 'No such act'));
             return;
         }
         var html = '';
