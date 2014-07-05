@@ -6,7 +6,7 @@ var helper = require('../helper/basehelper.js');
 
 var actSchema = new mongoose.Schema({
     name: String,
-    securityKey: String,
+    security_key: String,
     s_form: Schema.Types.Mixed,
     reg_start: String,
     reg_end: String,
@@ -16,7 +16,7 @@ var actSchema = new mongoose.Schema({
 });
 
 var actModel = mongoose.model('Activity', actSchema);
-var keys = ['name', 'securityKey', 'reg_start', 'reg_end',
+var keys = ['name', 'security_key', 'reg_start', 'reg_end',
            'description', 's_form'];
 
 function Activity(act) {
@@ -26,8 +26,8 @@ function Activity(act) {
     if(this.name == ''){
         this.name = 'default activity';
     }
-    if(this.securityKey == ''){
-        this.securityKey = crypto.randomBytes(8).toString('hex');
+    if(this.security_key == ''){
+        this.security_key = crypto.randomBytes(8).toString('hex');
     }
     if(act._id){
         this._id = act._id;
@@ -76,23 +76,18 @@ Activity.get = function(id, callback) {
     });
 };
 
-Activity.check_security_key = function(id, req, res){
-    actModel.findOne({_id: mongoose.Types.ObjectId(id)}, function(){
-        if(err){
-            return callback(err);
-        }
-        if(!act){
-            res.status(404).send('');
-        }
-        callback(null, act);
-    });
+Activity.prototype.check_security_key = function(id, req){
+    if(!(id in req.session) || ((id in req.session) && (req.session[id] != this.security_key))){
+        return -1;
+    }
+    return 1;
 };
 
 Activity.set_data = function(act, model){
     for(var index in keys){
         model[keys[index]] = act[keys[index]] || '';
     }
-    model.securityKey = act.security_key;
+    model.security_key = act.security_key;
     
 };
 
@@ -101,7 +96,7 @@ Activity.prototype.response_format = function(){
     for(var index in keys){
         response_body[keys[index]] = this[keys[index]];
     }
-    response_body.security_key = this.securityKey || '';
+    response_body.security_key = this.security_key || '';
     response_body.act_id = this._id;
     return response_body;
 };

@@ -8,10 +8,13 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var db = require('./models/db');
+var session = require('express-session');
+var settings = require('./settings');
 
 var app = express();
 
 // all environments
+app.use(session({secret: settings.session_secret, resave: true, saveUninitialized: true}));
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

@@ -48,26 +48,11 @@ function get_act(req, res){
             return;
         }
         act = new Activity(act);
+        console.log(act.check_security_key(req.params.id, req));
+        req.session[act._id] = act.security_key;
         res.send(act.response_format());
     });
 }
-
-function viewact(req, res){
-    Activity.get(req.params.id, function(err, act){
-        if(!act){
-            res.status(404).send(helper.only_error(-1, 'No such act'));
-            return;
-        }
-        var context = {
-            act_name: act.name,
-            act_id: act._id,
-            title: act.name,
-            form_info: act.s_form
-        };
-        res.render('actcontent',context);
-    });
-}
-
 
 function send_mail(req, res){
     Activity.get(req.params.act_id, function(err, act){
@@ -106,7 +91,6 @@ function add_gcalendar(req, res){
 
 exports.main = main;
 exports.newact = newact;
-exports.viewact = viewact;
 exports.save_info = save_info;
 exports.get_act = get_act;
 exports.send_mail = send_mail;
