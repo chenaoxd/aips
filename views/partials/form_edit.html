@@ -1,7 +1,7 @@
 <div>
   <div ng-repeat="form_instance in form_list" class="dz-form-edit">
-    <unit-edit unit-info="form_instance"></unit-edit>
     <a ng-click="list_remove($index)" style="cursor:pointer;">x</a>
+    <unit-edit unit-info="form_instance"></unit-edit>
   </div><br/>
   <button class="btn btn-default" ng-click="list_add()">添加</button>
 </div>

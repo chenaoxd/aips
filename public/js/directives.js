@@ -35,7 +35,7 @@ angular.module('myApp.directives', []).
                     $scope.form_list.splice(index, 1);
                 };
                 $scope.list_add = function(){
-                    $scope.form_list.push({type: 'text', label: 'label', required: '1', display: 'display'});
+                    $scope.form_list.push({type: 'text', label: 'label' + $scope.form_list.length, required: true, display: 'display', explanation: 'explanation', 'extra_list': []});
                 };
             },
             templateUrl: '/partials/form_edit.html'
@@ -68,6 +68,18 @@ angular.module('myApp.directives', []).
                     'text': '单选',
                     'value': 'radio'
                 }];
+                $scope.showadd = false;
+                $scope.tmp_option = '';
+                $scope.show_add = function(){
+                    $scope.showadd = true;
+                };
+                $scope.cancel = function(){
+                    $scope.showadd = false;
+                };
+                $scope.add_option = function(){
+                    $scope.unit_info.extra_list.push({'text': $scope.tmp_option});
+                    $scope.tmp_option = '';
+                };
             },
             templateUrl: '/partials/unit_edit.html'
         };

@@ -40,8 +40,8 @@ function Activity(act) {
         }
     }else{
         this.s_form = [
-            {'label': 'name', 'display':'姓名', 'type': 'text', 'required': true, 'explanation': '请填写您的姓名。'},
-            {'label': 'phonenum', 'display':'手机号', 'type': 'text', 'required': true, 'explanation': '请填写您的手机号。'}
+            {'label': 'name', 'display':'姓名', 'type': 'text', 'required': true, 'explanation': '请填写您的姓名。', 'extra_list': []},
+            {'label': 'phonenum', 'display':'手机号', 'type': 'text', 'required': true, 'explanation': '请填写您的手机号。', 'extra_list': []}
         ];
     }
 };
