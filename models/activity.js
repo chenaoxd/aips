@@ -76,7 +76,7 @@ Activity.get = function(id, callback) {
     });
 };
 
-Activity.prototype.set_security_key = function(){
+Activity.prototype.set_security_key = function(req){
     req.session[this._id] = this.security_key;
 };
 

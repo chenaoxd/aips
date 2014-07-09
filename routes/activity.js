@@ -23,6 +23,7 @@ function newact(req, res){
             return res.redirect('/');
         }
         act = new Activity(act);
+        act.set_security_key(req);
         res.send(act.response_format(req));
     });
 }
@@ -34,10 +35,15 @@ function save_info(req, res){
             return;
         }
         Activity.set_data(req.body, act);
-        act.save();
-        console.log(act);
         act = new Activity(act);
-        res.send(act.response_format(req));
+        act.save(function(err, act){
+            console.log(req);
+            if(err){
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            res.send(act.response_format(req));
+        });
     });
 }
 
