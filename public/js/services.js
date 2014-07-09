@@ -26,7 +26,6 @@ angular.module('myApp.services', []).
                     activity = Activity.get({act_id: act_id});
                     activity.$promise.then(
                         function(data){
-                            console.log(data);
                         },
                         function(error){
                             console.log(error.data);

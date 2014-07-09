@@ -1,0 +1,5 @@
+<label>显示</label><input type="text" ng-model="unit_info.label"/>
+<label>类型</label>
+<select ng-model="unit_info.type" ng-options="code.value as code.text for code in unit_types"></select>
+<label>解释</label><input type="text" ng-model="unit_info.explanation"/>
+<label>是否必填</label><input type="checkbox" ng-model="unit_info.required"/>

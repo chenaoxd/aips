@@ -1,9 +1,6 @@
 <div>
   <div ng-repeat="form_instance in form_list" class="dz-form-edit">
-    <label>显示</label><input type="text" ng-model="form_instance['display']">
-    <label>label</label><input type="text" ng-model="form_instance['label']" placeholder="建议dispaly的英文">
-    <label>类型</label><input type="text" ng-model="form_instance['type']" disabled>
-    <label>必填</label><input type="checkbox" ng-model="form_instance['required']">
+    <unit-edit unit-info="form_instance"></unit-edit>
     <a ng-click="list_remove($index)" style="cursor:pointer;">x</a>
   </div><br/>
   <button class="btn btn-default" ng-click="list_add()">添加</button>

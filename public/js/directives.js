@@ -16,6 +16,11 @@ angular.module('myApp.directives', []).
                 form_list: '=sform',
                 form_data: '=formData'
             },
+            controller: function($scope){
+                $scope.$watch($scope.form_data, function(){
+                    console.log($scope.form_data);
+                }, true);
+            },
             templateUrl: '/partials/form_dir.html'
         };
     }).
@@ -41,12 +46,29 @@ angular.module('myApp.directives', []).
             restrict: 'E',
             scope: {
                 unit_info: '=unitInfo',
-                unit_value: '=unitValue',
+                form_data: '=formData',
                 width: '=width'
             },
             controller: function($scope){
-                console.log($scope);
             },
             templateUrl: '/partials/form_unit.html'
+        };
+    }).
+    directive('unitEdit', function(){
+        return {
+            restrict: 'E',
+            scope: {
+                unit_info: '=unitInfo'
+            },
+            controller: function($scope){
+                $scope.unit_types = [{
+                    'text': '文本填空',
+                    'value': 'text'
+                },{
+                    'text': '单选',
+                    'value': 'radio'
+                }];
+            },
+            templateUrl: '/partials/unit_edit.html'
         };
     });

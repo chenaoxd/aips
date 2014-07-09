@@ -1,12 +1,8 @@
 <div>
   <legend>活动报名</legend>
   <form class="form-horizontal" ng-submit="submit_sign()">
-    
-    <div ng-repeat="form_unit in act.s_form">
-      <div class="form-group">
-        <form-unit unit-info="form_unit" unit-value="form_data[form_unit.label]" width="[2,2]"></form-unit>
-      </div>
-    </div>
+
+    <dz-reg-form sform="act.s_form" form-data="form_data"></dz-reg-form>
     <div class="form-group">
       <label class="control-label col-lg-2">发送信息到邮箱</label>
       <div class="col-lg-2">
