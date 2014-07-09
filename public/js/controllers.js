@@ -60,6 +60,8 @@ angular.module('myApp.controllers', ['ngResource']).
         $scope.form_data = {};
         $cookiestore.put('back_to_url', $location.url());
         $scope.submit_sign = function(){
+            console.log($scope.form_data);
+            return ;
             if($scope.sendmail == true){
                 $http.post('/api/activity/' + $scope.act.act_id + '/send_info', {'email': $scope.mail_to}).
                     success(function(data, status, headers, config){
