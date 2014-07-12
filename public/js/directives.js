@@ -77,8 +77,11 @@ angular.module('myApp.directives', []).
                     $scope.showadd = false;
                 };
                 $scope.add_option = function(){
-                    $scope.unit_info.extra_list.push({'text': $scope.tmp_option});
+                    $scope.unit_info.extra_list.push({'text': $scope.tmp_option, 'value': $scope.tmp_option});
                     $scope.tmp_option = '';
+                };
+                $scope.del_option = function(index){
+                    $scope.unit_info.extra_list.splice(index, 1);
                 };
             },
             templateUrl: '/partials/unit_edit.html'

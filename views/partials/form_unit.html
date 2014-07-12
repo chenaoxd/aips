@@ -1,4 +1,7 @@
 <label class="control-label col-lg-{{width[0]}}">{{unit_info.display}}</label>
 <div class="col-lg-{{width[1]}}">
   <input type="text" ng-if="unit_info.type=='text'" ng-model="form_data[unit_info.label]" class="form-control" name="{{unit_info.label}}">
+  <select type="radio" ng-if="unit_info.type=='radio'" ng-model="form_data[unit_info.lable]" name="{{unit_info.label}}">
+    <option value="option.value" ng-repeat="option in unit_info.extra_list">{{option.text}}</option>
+  </select>
 </div>
